@@ -7,9 +7,8 @@ class RedisService
     call_user_func_array(array($this->getRedisClient(), $methodName), $args);
   }
   
-  public function __construct($val)
+  public function __construct()
   {
-    $this->myNamespace = $val;
   }
   
   public function setRedisClient($val)
@@ -23,41 +22,37 @@ class RedisService
   }
   
   
-  public function setPrefix($val)
+  public function setNamespace($val)
   {
-    $this->prefix = $val;  
+    $this->myNamespace = $val;  
   }
   
-  protected function getPrefix()
-  {
-    return $this->prefix;  
-  }
-  
+
   protected function getNamespace()
   {
     return $this->myNamespace;
   }
   
-  protected function prefixAndNamespace($string)
+  protected function prefixWithNamespace($string)
   {
-    return $this->getPrefix().'_'.$this->getNamespace().'_'.$string;  
+    return $this->getNamespace().'_'.$this->getNamespace().'_'.$string;  
   }
   
   public function get($key)
   {
-    $prefixedKey = $this->prefixAndNamespace($key);
+    $prefixedKey = $this->prefixWithNamespace($key);
     return $this->getRedisClient()->get($prefixedKey);
   }
 
   public function set($key, $value)
   {
-    $prefixedKey = $this->prefixAndNamespace($key);
+    $prefixedKey = $this->prefixWithNamespace($key);
     return $this->getRedisClient()->set($prefixedKey, $value);
   }
   
   public function exists($key)
   {
-    $prefixedKey = $this->prefixAndNamespace($key);
+    $prefixedKey = $this->prefixWithNamespace($key);
     return $this->getRedisClient()->exists($prefixedKey);
   }
   
