@@ -1,0 +1,7 @@
+{
+    "name": "tobias74/php-namespaced-redis-client",
+    "description": "a very simple, almost featureless namespaced redis-client",
+    "type": "library",
+    "license": "MIT",
+    "require": {}
+}
