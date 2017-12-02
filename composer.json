@@ -3,5 +3,10 @@
     "description": "a very simple, almost featureless namespaced redis-client",
     "type": "library",
     "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PhpNamespacedRedisClient\\": "src/"
+        }
+    },
     "require": {}
 }
